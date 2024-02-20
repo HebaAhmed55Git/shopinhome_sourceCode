@@ -1,0 +1,65 @@
+
+
+<section>
+    <div class="row g-0">
+        <div class="col-md-9">
+            <owl-carousel-o [options]="customOptions2">
+                <ng-template carouselSlide>
+                  <img height="400" src="assets/images/slider-image-1.jpeg">
+                </ng-template>  
+                <ng-template carouselSlide>
+                  <img height="400" src="assets/images/slider-image-2.jpeg">
+                </ng-template>  
+                <ng-template carouselSlide>
+                  <img height="400" src="assets/images/slider-image-3.jpeg">
+                </ng-template>  
+              </owl-carousel-o>
+
+        </div>
+        <div class="col-md-3">
+            <img height="200" class="w-100" src="assets/images/slider-image-1.jpeg">
+            <img height="200" class="w-100" src="assets/images/slider-image-1.jpeg">
+        </div>
+    </div>
+</section>
+
+<section class="py-4">
+    <h2>Shop At Home Categories</h2>
+    <owl-carousel-o [options]="customOptions">
+  
+      <ng-container *ngFor="let categpry of allCategories">
+        <ng-template carouselSlide >
+          <img height="200" [src]="categpry.image" [alt]="categpry.name" >
+          <span class="text-main">{{categpry.name}}</span>
+        </ng-template>
+      </ng-container>
+  
+    </owl-carousel-o>
+
+</section>
+
+<section>
+    <h2>Popular Products</h2>
+    <input [(ngModel)]="userWord" class="w-50 my-5 mx-auto form-control" placeholder="Search Product....">
+    <div class="row g-4">
+        <div *ngFor="let product of allProducts|search:userWord" class="col-md-2">
+            <div class="product">
+
+                <div [routerLink]="['/productDetails',product._id]" routerLinkActive="router-link-active"  class="cursor-pointer">
+                  <img class="w-100" [src]="product.imageCover" [title]="product.title" [alt]="product.title">
+                  <h2 class="h6 text-main fw-bold">{{product.category?.name}}</h2>
+                  <h1 class="h5 fw-bold">{{product.title|subtitle}}</h1>
+
+                  <div class="d-flex justify-content-between align-items-center">
+                      <span class="small text-muted">{{product.price|currency:'EGP'}}</span>
+                      <span>
+                          <i [class.rating-color]="product.ratingsAverage >= star" *ngFor="let star of [1,2,3,4,5,6]" class="fas fa-star "></i>
+                          {{product.ratingsAverage}}
+                      </span>
+                  </div>
+                </div>
+                <button (click)="addProduct(product._id , addBtn)" #addBtn class="btn bg-main text-white d-block w-100">Add To Cart</button>
+            </div>
+        </div>
+    </div>
+</section>

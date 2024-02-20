@@ -1,0 +1,45 @@
+<section>
+
+    <div class="row g-4">
+        
+
+        <div class="d-flex justify-content-center my-5">
+            <pagination-controls  id="myPagination"
+                      (pageChange)="pageChanged($event)"
+                      (pageBoundsCorrection)="pageChanged($event)"
+                      
+                      previousLabel="Previous"
+                      nextLabel="Next"
+                      >
+            </pagination-controls>
+        </div>
+
+
+        <div *ngFor="let product of allProducts| paginate: { id: 'myPagination',
+        itemsPerPage: pageSize,
+        currentPage: currentPage,
+        totalItems: totalItems }" class="col-md-2">
+            <div class="product">
+
+                <div [routerLink]="['/productDetails',product._id]" routerLinkActive="router-link-active"  class="cursor-pointer">
+                  <img class="w-100" [src]="product.imageCover" [title]="product.title" [alt]="product.title">
+                  <h2 class="h6 text-main fw-bold">{{product.category?.name}}</h2>
+                  <h1 class="h5 fw-bold">{{product.title|subtitle}}</h1>
+
+                  <div class="d-flex justify-content-between align-items-center">
+                      <span class="small text-muted">{{product.price|currency:'EGP'}}</span>
+                      <span>
+                          <i [class.rating-color]="product.ratingsAverage >= star" *ngFor="let star of [1,2,3,4,5,6]" class="fas fa-star"></i>
+                          {{product.ratingsAverage}}
+                      </span>
+                  </div>
+                </div>
+                <button (click)="addProduct(product._id , addBtn)" #addBtn class="btn bg-main text-white d-block w-100">Add To Cart</button>
+            </div>
+        </div>
+
+        
+
+
+    </div>
+</section>

@@ -1,0 +1,46 @@
+<div class="w-75 mx-auto">
+
+
+    <div *ngIf="allCartItemsProd;else emptyCardmessage">
+        <h1 class="text-center text-main">Totla Price : {{totalPrice}}</h1>
+        <button (click)="clearCartBtn()" class="btn btn-outline-danger d-flex ms-auto my-1">Clear Cart</button>
+        <div *ngFor="let p of allCartItemsProd" class="row align-items-center">
+        
+            <div class="col-md-2">
+                <img class="w-100" [src]="p.product.imageCover">
+            </div>
+        
+            <div class="col-md-7">
+        
+                <h1 class="h5 text-muted">{{p.product.title}}</h1>
+                <span>{{p.product.category?.name}}</span>
+                <div class="mb-3">
+                    <span>{{p.price}}EGP</span>
+                    <div>
+                            <i class="fa-solid fa-star rating-color"></i>
+                            <span>{{p.product.ratingsAverage}}</span>
+                    </div>
+                </div>
+        
+                <i (click)="deleteItemBtn(p.product.id)" class="fa-solid cursor-pointer h4 text-danger fa-trash"></i>
+        
+            </div>
+        
+            <div class="col-md-2">
+                <!--  -->
+                <i (click)="updateCartBtn(p.product.id ,  p.count , 'plus' )" class="fa-solid cursor-pointer text-main h4 fa-square-plus"></i>
+                <span> {{p.count}} </span>
+                <i (click)="updateCartBtn(p.product.id , p.count , 'Mins')" class="fa-solid cursor-pointer text-main h4 fa-square-minus"></i>
+            </div>
+        
+        </div>
+
+        <button [routerLink]="['/onlinePayment',cartId]" routerLinkActive="router-link-active"  class="btn bg-main text-white d-block">Online Payment</button>
+    </div>
+
+    <ng-template #emptyCardmessage>
+        <h3 class="text-center my-5 text-main">Sorry your cart is Empty ^_^</h3>
+    </ng-template>
+
+    
+</div>

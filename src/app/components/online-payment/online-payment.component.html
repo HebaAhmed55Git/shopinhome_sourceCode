@@ -1,0 +1,21 @@
+<div class="w-75 mx-auto my-5">
+    <h1 class="text-center text-main">Online Payment</h1>
+
+    <form (ngSubmit)="adressFormSubmit()" [formGroup]="adressForm">
+        <div>
+            <label>Details:</label>
+            <input formControlName="details" class="form-control">
+        </div>
+        <div>
+            <label>phone:</label>
+            <input formControlName="phone" class="form-control">
+        </div>
+        <div class="mb-5">
+            <label>city:</label>
+            <input formControlName="city" class="form-control">
+        </div>
+
+        <button type="submit" class="btn bg-main text-white">Pay</button>
+    </form>
+
+</div>
